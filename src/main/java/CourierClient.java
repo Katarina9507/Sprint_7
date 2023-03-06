@@ -24,4 +24,15 @@ public class CourierClient extends DataForTests {
                 .post(apiCourier)
                 .then();
     }
+
+    @Step("Get response for Login")
+    public ValidatableResponse getLogin(Login login) {
+        return given()
+                .header("Content-type", "application/json")
+                .and()
+                .body(login)
+                .when()
+                .post(apiLogin)
+                .then();
+    }
 }

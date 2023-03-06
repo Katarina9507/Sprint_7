@@ -17,25 +17,14 @@ public class LoginCourierTest extends DeleteAndCreateMethods {
 
     @DisplayName("Check the status code 200 and the ID value with valid data")
     @Test
-    public void SuccessfulLoginTest(){
+    public void successfulLoginTest(){
         CourierClient courierClient = new CourierClient();
-        ValidatableResponse dataCourier = courierClient.getLoginResponse(
+        ValidatableResponse dataCourier = courierClient.getLogin(
                 new Login(existingLogin, existingLoginPassword));
         dataCourier.statusCode(200);
         MatcherAssert.assertThat("id", notNullValue());
     }
 
-    /*@DisplayName("Check the 404 status code and the error message when the data does not exist")
-    @Test
-    public void loginWithNonExistentDataTest(){
-        CourierClient courierClient = new CourierClient();
-        ValidatableResponse nonExistentData  = courierClient.getLoginResponse(
-                Login.getRandomLogin());
-        nonExistentData
-                .statusCode(404)
-                .assertThat()
-                .body("message", equalTo("Учетная запись не найдена"));
-    }*/
 
     @DisplayName("Check status code 400 and error message without login field")
     @Test
@@ -65,7 +54,7 @@ public class LoginCourierTest extends DeleteAndCreateMethods {
     @Test
     public void testRequestNonExistentData(){
         CourierClient courierClient = new CourierClient();
-        ValidatableResponse nonExistentData  = courierClient.getLoginResponse(
+        ValidatableResponse nonExistentData  = courierClient.getLogin(
                 Login.getRandomLogin());
         nonExistentData
                 .statusCode(404)
